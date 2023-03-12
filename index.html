@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple slide fade effect</title>
+    <style>
+            * {
+                margin: 0px;
+                padding: 0px;
+                box-sizing: border-box;
+            }
+
+            body {
+                background-image: linear-gradient(to left bottom, #212c3d, #223f65, #1e5390, #1566bd, #127aeb);
+                color: #fff;
+            }
+
+            .container-header {
+                width: 100%;
+                height: auto;
+                margin-bottom: 25px;
+                text-align: center;
+                display: grid;
+                justify-content: center;
+            }
+
+            .container-header > span {
+                padding: 20px;
+                width: auto;
+            }
+
+            .container-header > span > ul > li {
+                text-align: start;
+                width: 100%;
+                margin-bottom: 12px;
+            }
+           
+            .container {
+                height: 65vh;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                margin-bottom: 50px;
+            }
+
+            .img-space {
+                width: 100%;
+                object-fit: fill;
+                display: grid;
+                justify-content: center;
+                padding-top: 15px;
+            }
+
+            .img-space > img {
+                height: 300px;
+                max-width: 100%;
+                width: 600px;
+                border-radius: 20px; 
+                transition: 300ms;    
+            }
+
+            .img-space > img:hover {
+                box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+                transform: scale(1.2);
+            }
+
+            @media (max-width: 730px){
+                .img-space > img {
+                    width: 220px;
+                    max-width: 100%;
+                }
+            }
+
+            /* Effect */
+            .fade-slide {
+				animation: slideScale 0.9s cubic-bezier(0.250, 0.460, 0.450, 0.940)
+			}
+
+			/* Slide animation */
+			@keyframes slideScale {
+				0% {
+					opacity: 0.1;
+				}
+				25% {
+					opacity: 0.3;
+				}
+				50% {
+					opacity: 0.6;
+				}
+				75% {
+					opacity: 0.8;
+				}
+				100% {
+					opacity: 1;
+				}
+			}
+
+            .classTxt {
+                color: #d645e9cc;
+            }
+
+            .constElement {
+                color: #6ed40fb6;
+            }
+
+            .container-footer {
+                width: 100%;
+                height: 80px;
+                background-color: #212c3d;
+                text-align: center;
+            }
+
+            .container-footer > h5 {
+                padding-top: 10px;
+            }
+
+            .container-footer > h5 > a {
+                color: #fff;
+                font-weight: 600;
+                text-decoration: none;
+                transition: .2s;
+            }
+
+            .container-footer > h5 > a:hover {
+                transition: .2s;
+                text-decoration: underline;
+            }
+    </style>
+</head>
+<body>
+    <div class="container-header">
+        <span>
+            <h1>Slide gallery fade effect</h1>
+            <ul>
+                <li>Faça seu proprio slide em seu site de maneira rápida e fácil apenas utilizando funções jquery.</li>
+                <li>Utilize o array gallery e o preencha com os path image que precisar colocar em seu slide e dinâmicamente será atualizada as imagens.</li>
+                <li>Você pode definir o tempo de transição de cada slide alterando valor da váriavel <b class="constElement"><i>timerSlide</i></b>.</li>
+                <li>Lembre-se, é necessário ter um elemento <b class="classTxt"><i>.fade-slide</i></b> em seu css global, para que seja feito a transição corretamente.</li>
+            </ul>
+        </span>
+    </div>
+    <!-- Container gallery start -->
+    <div class="container">
+        <div class="img-space">
+            <!-- Slide img component -->
+            <img src="https://www.direitoprofissional.com/wp-content/uploads/2018/03/299800-estender-500-saiba-mais-sobre-a-gestao-administrativa-de-um-escritorio-de-advocacia.jpg" id="slide" alt="slide">
+        </div>
+    </div>
+    <!-- Container gallery end -->
+    <div class="container-footer">
+        <h5>Conheça meu github: <a target="_blank" href="https://github.com/DevMboo?tab=repositories">Clique aqui</a></h5>
+    </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+<script>
+        /* Fazendo a troca dos slides */
+        $(function () {
+
+            /* Temporizador */
+            const timerSlide = 4000
+
+            /* Galeria de imagens */
+            const gallery = [
+                'https://img.freepik.com/fotos-gratis/grupo-de-pessoas-diversas-tendo-uma-reuniao-de-negocios_53876-25060.jpg?w=900&t=st=1678472139~exp=1678472739~hmac=af02fd6652a1f6cd277a5c1c01ed748d3d846248a3f2ad8c221279c4a2e7d924',
+                'https://www.direitoprofissional.com/wp-content/uploads/2018/03/299800-estender-500-saiba-mais-sobre-a-gestao-administrativa-de-um-escritorio-de-advocacia.jpg',
+                'https://img.freepik.com/fotos-gratis/diversas-pessoas-trabalhando-no-escritorio_53876-104681.jpg?w=1480&t=st=1678595933~exp=1678596533~hmac=3591596320778b11c1abf2cead059e5239c757443c13c85d17d1dbc31146d3d4',
+                'https://img.freepik.com/fotos-gratis/laboratorio-de-informatica-moderno-e-equipado_23-2149241225.jpg?w=1380&t=st=1678595968~exp=1678596568~hmac=5b710656cd3c9f8e00195d8ee5bf4d65dc63acc436cc8bced333cfae36f3a3a9',
+                'https://www.officelab.com.br/wp-content/uploads/2019/11/formato-do-escritorio-tem-a-ver-com-a-produtividade-do-colaborador-artany-officelab-1-1110x630.jpg'
+            ]
+            /* Incrementador */
+            let i = 0
+            
+            /* Alterando as imagens da galeria*/
+            setInterval(()=> {
+
+                if(i <= gallery.length - 1 && gallery.length > 1){
+
+                    /* Adicionando o fade */
+                    $('#slide').fadeIn().addClass("fade-slide")
+
+                    /* Alterando a imagem do elemento */
+                    $('#slide').attr('src', gallery[i] )    
+                    i++;
+
+                    /* Removendo classe fade */
+                    setTimeout(() => {
+                        $('#slide').removeClass('fade-slide')
+                    },300)
+                }else{
+                    i = 0
+                }
+
+            }, timerSlide)
+            
+        })
+</script>
+</html>
